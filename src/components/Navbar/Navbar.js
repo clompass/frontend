@@ -13,7 +13,7 @@ const ClompassNavbar = (props) => {
                     <LinkContainer to="/">
                         <Nav.Link>Dashboard</Nav.Link>
                     </LinkContainer>
-                    <Nav.Link as="a" href="https://outlook.com/lilydaleheights.vic.edu.au" target="_blank" rel="noopener">Emails</Nav.Link>
+                    <Nav.Link as="a" href="https://outlook.com/lilydaleheights.vic.edu.au" target="_blank" rel="noopener" aria-hidden="true">Emails <i className="fa fa-external-link" style={{"font-size": "75%"}} aria-hidden="true"></i></Nav.Link>
                     <LinkContainer to="/learning-tasks">
                         <Nav.Link>Learning Tasks</Nav.Link>
                     </LinkContainer>
