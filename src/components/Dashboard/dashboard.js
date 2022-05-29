@@ -26,6 +26,8 @@ const Dashboard = (props) => {
                     <br/>
                     <a href="https://github.com/nslebruh/clompass-project-backend/" target="_blank" rel="noreferrer" aria-hidden="true">Backend Server <i className="fa fa-external-link" style={{"font-size": "70%"}} aria-hidden="true"></i></a>
                     <br/>
+                    <br/>
+                    If you have any issues, feedback or inquiries, contact support at <a href="mailto:support@clompass.com?subject=Issues, feedback or inquiry regarding clompass.com">support@clompass.com</a>
                   </p>
               </Col>
             </Row>
