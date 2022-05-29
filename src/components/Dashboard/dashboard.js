@@ -1,9 +1,10 @@
 import {Row, Col} from "react-bootstrap"
 import {Schedule} from "../Schedule"
 import {LearningTasks} from "../LearningTasks"
+import React from "react"
 const Dashboard = (props) => {
     return (                      
-        <>
+        <React.Fragment>
             <Row>
               <Col xs={4} className="text-center">
                 <h1>Today's Schedule</h1>
@@ -31,7 +32,7 @@ const Dashboard = (props) => {
                   </p>
               </Col>
             </Row>
-    </>
+    </React.Fragment>
     )
 }
 export default Dashboard
