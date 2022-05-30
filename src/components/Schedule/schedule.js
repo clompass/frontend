@@ -98,7 +98,7 @@ export default class Schedule extends React.Component {
                     ?   <React.Fragment>
                             <UpdateDataPage state={this.state.update_data_page} setOldData={this.handleOldData} setUrl={this.handleUrl} setDataPage={this.handleDataPage} ws={this.ws} type="schedule" />
                             <Button type="button" onClick={() => this.setState({update_data_page: true})}>Update Data</Button>
-                            {this.state.schedule_url.length !== 0 ?<span>Add this calender to your own calender: <a href={this.state.schedule_url.replace("https://", "webcal://")} target="_blank" rel="noreferrer">Here</a></span> : null}
+                            {this.state.schedule_url.length !== 0 ?<span>Add this calender to your own calender: <a href={this.state.schedule_url.replace("https://", "webcal://")} target="_blank" rel="noreferrer">Here <i className="fa fa-external-link" style={{"font-size": "70%"}} aria-hidden="true"></i></a></span> : null}
                         </React.Fragment>
                     : null
                 }
