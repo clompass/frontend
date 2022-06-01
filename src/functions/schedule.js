@@ -21,6 +21,10 @@ const fetchSchedule = async (url) => {
         const ics = ICalParser.toJSON(data);
         console.log(ics)
         for (let i = 0; i < ics.events.length; i++) {
+          let classChanged = "false";
+          if (ics.events[i].location.includes("<strike>") || ics.events[i].description.includes("<strike>")) {
+            classChanged = "true"
+          }
           d[ics.events[i].uid.split("@")[0]] = {
             startDate: parseTime(ics.events[i].dtstart.value),
             uid: ics.events[i].uid.split("@")[0],
@@ -31,6 +35,7 @@ const fetchSchedule = async (url) => {
             room: ics.events[i].location !== "" ? ics.events[i].location : "No room",
             teacher: ics.events[i].description.split(' : ')[1],
             text: ics.events[i].summary + ' - ' + (ics.events[i].location !== "" ? ics.events[i].location : "No room") + ' - ' + ics.events[i].description.split(' : ')[1],
+            classChanged: classChanged,
           }
         }
     } catch (error) {

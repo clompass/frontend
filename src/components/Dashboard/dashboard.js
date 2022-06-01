@@ -23,9 +23,9 @@ const Dashboard = (props) => {
                     Any data submitted is not collected or stored. 
                     The source code is linked below:
                     <br/>
-                    <a href="https://github.com/nslebruh/clompass-project-frontend" target="_blank" rel="noreferrer" aria-hidden="true">Frontend Website <i className="fa fa-external-link" style={{"font-size": "70%"}} aria-hidden="true"></i></a>
+                    <a href="https://github.com/nslebruh/clompass-project-frontend" target="_blank" rel="noreferrer" aria-hidden="true">Frontend Website <i className="fa fa-external-link" style={{"fontSize": "70%"}} aria-hidden="true"></i></a>
                     <br/>
-                    <a href="https://github.com/nslebruh/clompass-project-backend/" target="_blank" rel="noreferrer" aria-hidden="true">Backend Server <i className="fa fa-external-link" style={{"font-size": "70%"}} aria-hidden="true"></i></a>
+                    <a href="https://github.com/nslebruh/clompass-project-backend/" target="_blank" rel="noreferrer" aria-hidden="true">Backend Server <i className="fa fa-external-link" style={{"fontSize": "70%"}} aria-hidden="true"></i></a>
                     <br/>
                     <br/>
                     If you have any issues, feedback or questions, contact support at <a href="mailto:support@clompass.com">support@clompass.com</a>

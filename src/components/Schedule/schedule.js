@@ -10,13 +10,19 @@ import Scheduler, { Resource } from 'devextreme-react/scheduler';
 import { Button } from 'react-bootstrap';
 import { UpdateDataPage } from '../updateData';
 import "./schedule.scss"
+import { From } from 'devextreme-react/autocomplete';
+const rooms = [
+    "B7"
+];
 const colours = [
     {
-        id: 0,
+        id: "false",
+        text: "No",
         color: "#1ca8dd"
     },
     {
-        id: 1,
+        id: "true",
+        text: "Yes",
         color: "#d9534f"
     }
 ];
@@ -57,8 +63,65 @@ export default class Schedule extends React.Component {
             schedule_url: this.schedule_url,
         }
         this.views = this.props.onlyDayView === "true" ? ["day"] : ["day", "week", "month"] 
-
     }
+    onAppointmentFormOpening(e) {
+        const { form } = e;
+        let data = e.appointmentData;
+        let items = form.option("items")
+        let newItems = [
+            {
+                colCountByScreen: {
+                    "lg": 2,
+                    "xs": 1
+                },
+                colSpan: 2,
+                itemType: "group",
+                items: [{
+                    "dataField": "subject",
+                    "editorType": "dxTextBox",
+                    "label": {
+                        "text": "Subject"
+                    }
+                },
+                {
+                    label: {
+                        text: "Room"
+                    },
+                    editorType: "dxTextBox",
+                    dataField: "room"
+                },
+                {
+                    label: {
+                        text: "Teacher"
+                    },
+                    editorType: "dxTextBox",
+                    dataField: "teacher"
+                },
+                {
+                    label: {
+                        text: "Class changed?"
+                    },
+                    editorType: "dxSelectBox",
+                    editorOptions: {
+                        items: colours,
+                        displayExpr: "text",
+                        valueExpr: "id",
+                    },
+                    dataField: "classChanged"
+                },
+                {
+                    colSpan: 2,
+                    itemType: "empty"
+                },
+                {...items[0].items[1]}, {...items[0].items[2]}],
+                name: "mainGroup"
+            },
+            items[1]
+        ];
+        form.option('items', newItems)
+        console.log(form.option('items'))
+      }
+    
     handleDataPage = (value) => {
         this.setState({update_data_page: value})
     }
@@ -98,7 +161,7 @@ export default class Schedule extends React.Component {
                     ?   <React.Fragment>
                             <UpdateDataPage state={this.state.update_data_page} setOldData={this.handleOldData} setUrl={this.handleUrl} setDataPage={this.handleDataPage} ws={this.ws} type="schedule" />
                             <Button type="button" onClick={() => this.setState({update_data_page: true})}>Update Data</Button>
-                            {this.state.schedule_url.length !== 0 ?<span>Add this calender to your own calender: <a href={this.state.schedule_url.replace("https://", "webcal://")} target="_blank" rel="noreferrer">Here <i className="fa fa-external-link" style={{"font-size": "70%"}} aria-hidden="true"></i></a></span> : null}
+                            {this.state.schedule_url.length !== 0 ?<span>Add this calender to your own calender: <a href={this.state.schedule_url.replace("https://", "webcal://")} target="_blank" rel="noreferrer">Here <i className="fa fa-external-link" style={{"fontSize": "70%"}} aria-hidden="true"></i></a></span> : null}
                         </React.Fragment>
                     : null
                 }
@@ -111,9 +174,12 @@ export default class Schedule extends React.Component {
                     showAllDayPanel={false}
                     height={this.props.onlyDayView !== "true" ? 635 : 579}
                     cellDuration={45}
+                    editing={true}
                     startDayHour={8}
                     endDayHour={15.5}
                     showCurrentTimeIndicator={true}
+                    //onAppointmentFormOpening={(e) => console.log(e)}
+                    onAppointmentFormOpening={this.onAppointmentFormOpening}
                     //adaptivityEnabled={true}
                     defaultCurrentView={this.props.onlyDayView === "true" ? "day" : "week"}
                     defaultCurrentDate={new Date()}
@@ -121,7 +187,7 @@ export default class Schedule extends React.Component {
                     <Resource
                         dataSource={colours}
                         fieldExpr={"classChanged"}
-                        label={'Class'}
+                        label={'Class Changed?'}
                         useColorAsDefault={true}
                     />
                 </Scheduler>
