@@ -213,6 +213,7 @@ export default class Schedule extends React.Component {
                     onAppointmentFormOpening={this.onAppointmentFormOpening}
                     onAppointmentAdded={this.handleAdd}
                     onAppointmentDeleted={this.handleDelete}
+                    onAppointmentUpdated={this.handleUpdate}
                     //adaptivityEnabled={true}
                     defaultCurrentView={this.props.onlyDayView === "true" ? "day" : "week"}
                     defaultCurrentDate={new Date()}
