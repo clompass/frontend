@@ -131,7 +131,7 @@ export default class Schedule extends React.Component {
     }
     handleUpdate = (e) => {
         let data = e.appointmentData;
-        let new_data = {data, ...this.state.data_store.saved}
+        let new_data = {[data.uid]: data, ...this.state.data_store.saved}
         saveLocalStorageData({schedule_data: new_data})
         this.setState({data_store: {...this.state.data_store.new, saved: new_data}})
     }
