@@ -34,7 +34,6 @@ const fetchSchedule = async (url) => {
             subject: ics.events[i].summary,
             room: ics.events[i].location !== "" ? ics.events[i].location : "No room",
             teacher: ics.events[i].description.split(' : ')[1],
-            text: ics.events[i].summary + ' - ' + (ics.events[i].location !== "" ? ics.events[i].location : "No room") + ' - ' + ics.events[i].description.split(' : ')[1],
             classChanged: classChanged,
           }
         }
@@ -44,10 +43,10 @@ const fetchSchedule = async (url) => {
     }
     return d
 }
-const appendData = (dataset1, dataset2) => {
+const appendData = (dataset2, dataset1) => {
   let data = {}
-  let keys1 = {}
-  let keys2 =  {}
+  let keys1 = []
+  let keys2 =  []
   let y;
   let x = []
   if (dataset1.length !== 0) {

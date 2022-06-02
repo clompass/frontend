@@ -10,10 +10,6 @@ import Scheduler, { Resource } from 'devextreme-react/scheduler';
 import { Button } from 'react-bootstrap';
 import { UpdateDataPage } from '../updateData';
 import "./schedule.scss"
-import { From } from 'devextreme-react/autocomplete';
-const rooms = [
-    "B7"
-];
 const colours = [
     {
         id: "false",
@@ -66,7 +62,6 @@ export default class Schedule extends React.Component {
     }
     onAppointmentFormOpening(e) {
         const { form } = e;
-        let data = e.appointmentData;
         let items = form.option("items")
         let newItems = [
             {
@@ -99,6 +94,14 @@ export default class Schedule extends React.Component {
                 },
                 {
                     label: {
+                        text: "Uid"
+                    },
+                    editorType: "dxTextBox",
+                    dataField: "uid"
+
+                },
+                {
+                    label: {
                         text: "Class changed?"
                     },
                     editorType: "dxSelectBox",
@@ -119,9 +122,38 @@ export default class Schedule extends React.Component {
             items[1]
         ];
         form.option('items', newItems)
-        console.log(form.option('items'))
-      }
-    
+    }
+    handleAdd = (e) => {
+        let data = e.appointmentData
+        let new_data = {...this.state.data_store.saved, [data.uid]: data}
+        saveLocalStorageData({schedule_data: new_data})
+        this.setState({data_store: {...this.state.data_store.new, saved: new_data}})
+    }
+    handleUpdate = (e) => {
+        let data = e.appointmentData;
+        let new_data = {data, ...this.state.data_store.saved}
+        saveLocalStorageData({schedule_data: new_data})
+        this.setState({data_store: {...this.state.data_store.new, saved: new_data}})
+    }
+    handleDelete = (e) => {
+        let data2 = this.state.data_store.new;
+        let keys2 = Object.keys(data2)
+        let data = {...this.state.data_store.saved}
+        let keys = Object.keys(data)
+        for (let i = 0; i < keys.length; i++) {
+            if (e.appointmentData.uid === data[keys[i]].uid) {
+                delete data[keys[i]]
+            }
+        }
+        for (let i = 0; i < keys2.length; i++) {
+            if (e.appointmentData.uid === data2[keys2[i]].uid) {
+                delete data2[i]
+            }
+        }
+        saveLocalStorageData({schedule_data: data})
+        this.setState({data_store: {data2, data}})
+        
+    }
     handleDataPage = (value) => {
         this.setState({update_data_page: value})
     }
@@ -178,8 +210,9 @@ export default class Schedule extends React.Component {
                     startDayHour={8}
                     endDayHour={15.5}
                     showCurrentTimeIndicator={true}
-                    //onAppointmentFormOpening={(e) => console.log(e)}
                     onAppointmentFormOpening={this.onAppointmentFormOpening}
+                    onAppointmentAdded={this.handleAdd}
+                    onAppointmentDeleted={this.handleDelete}
                     //adaptivityEnabled={true}
                     defaultCurrentView={this.props.onlyDayView === "true" ? "day" : "week"}
                     defaultCurrentDate={new Date()}

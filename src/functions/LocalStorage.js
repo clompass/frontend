@@ -18,6 +18,9 @@ const getLocalStorageData = (key = null) => {
         data = JSON.parse(data)
         if (key) {
             x = data[key]
+            if (!x) {
+                x = {}
+            }
         } else {
             x = data
         }
