@@ -1,0 +1,23 @@
+<svg width="256" height="256" xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <!-- Body -->
+  <rect x="0" y="0" width="256" height="256" stroke="none" fill="none"/>
+  <rect x="10" y="10" width="236" height="236" rx="90" stroke="#000d24" stroke-width="20" />
+  <rect x="10" y="10" width="236" height="236" rx="90" stroke="#09337a" fill="#197fa8" stroke-width="10" />
+
+  <!-- Head -->
+  <rect x="104" y="48" width="48" height="48" rx="19" fill="#09337a" />
+
+  <!-- Left Arm -->
+  <path id="arm" d="
+    M124 106
+    c25 0, 25 0, 3 120
+    c0 6, -8 6, -8 0
+    c-25 -120, -25 -120, 0 -120
+  " fill="#09337a" transform="rotate(+28, 128 72)" />
+
+  <!-- Right arm (flipped) -->
+  <use xlink:href="#arm" transform="scale(-1 1) translate(-256, 0)" />
+
+</svg>
