@@ -31,10 +31,11 @@ const fetchSchedule = async (url) => {
             formattedStart: new Date(parseTime(ics.events[i].dtstart.value)).toLocaleTimeString("us-en", { hour: 'numeric', minute: 'numeric', hour12: true }),
             endDate: parseTime(ics.events[i].dtend.value),
             formattedEnd: new Date(parseTime(ics.events[i].dtend.value)).toLocaleTimeString("us-en", { hour: 'numeric', minute: 'numeric', hour12: true }),
-            subject: ics.events[i].summary,
+            text: ics.events[i].summary,
             room: ics.events[i].location !== "" ? ics.events[i].location : "No room",
             teacher: ics.events[i].description.split(' : ')[1],
             classChanged: classChanged,
+
           }
         }
     } catch (error) {

@@ -26,14 +26,14 @@ const RenderAppointment = (model) => {
     return (
         <div>
             <div className="dx-scheduler-appointment-title">
-                {model.appointmentData.subject}
+                {model.appointmentData.text}
             </div>
             <div className="dx-scheduler-appointment-content-details">
                 {model.appointmentData.room ? model.appointmentData.room : "No room"} - {model.appointmentData.teacher ? model.appointmentData.teacher : "No teacher given"}
                 
             </div>
             <div className='dx-scheduler-appointment-content-date'>
-                {model.appointmentData.formattedStart} - {model.appointmentData.formattedEnd}
+                {new Date(model.appointmentData.startDate).toLocaleTimeString("us-en", { hour: 'numeric', minute: 'numeric', hour12: true })} - {new Date(model.appointmentData.endDate).toLocaleTimeString("us-en", { hour: 'numeric', minute: 'numeric', hour12: true })}
             </div>
             
         </div>
@@ -60,68 +60,74 @@ export default class Schedule extends React.Component {
         }
         this.views = this.props.onlyDayView === "true" ? ["day"] : ["day", "week", "month"] 
     }
+    onAppointmentClick(e) {
+        console.log(e)
+    }
     onAppointmentFormOpening(e) {
         const { form } = e;
         let items = form.option("items")
-        let newItems = [
-            {
-                colCountByScreen: {
-                    "lg": 2,
-                    "xs": 1
-                },
-                colSpan: 2,
-                itemType: "group",
-                items: [{
-                    "dataField": "subject",
-                    "editorType": "dxTextBox",
-                    "label": {
-                        "text": "Subject"
-                    }
-                },
-                {
-                    label: {
-                        text: "Room"
-                    },
-                    editorType: "dxTextBox",
-                    dataField: "room"
-                },
-                {
-                    label: {
-                        text: "Teacher"
-                    },
-                    editorType: "dxTextBox",
-                    dataField: "teacher"
-                },
-                {
-                    label: {
-                        text: "Uid"
-                    },
-                    editorType: "dxTextBox",
-                    dataField: "uid"
-
-                },
-                {
-                    label: {
-                        text: "Class changed?"
-                    },
-                    editorType: "dxSelectBox",
-                    editorOptions: {
-                        items: colours,
-                        displayExpr: "text",
-                        valueExpr: "id",
-                    },
-                    dataField: "classChanged"
-                },
-                {
-                    colSpan: 2,
-                    itemType: "empty"
-                },
-                {...items[0].items[1]}, {...items[0].items[2]}],
-                name: "mainGroup"
+        console.log(items)
+        let mainGroup = {
+            colCountByScreen: {
+                "lg": 2,
+                "xs": 1
             },
-            items[1]
-        ];
-        form.option('items', newItems)
+            colSpan: 2,
+            itemType: "group",
+            items: [{
+                "dataField": "text",
+                "editorType": "dxTextBox",
+                "label": {
+                    "text": "Subject"
+                }
+            },
+            {
+                label: {
+                    text: "Room"
+                },
+                editorType: "dxTextBox",
+                dataField: "room"
+            },
+            {
+                label: {
+                    text: "Teacher"
+                },
+                editorType: "dxTextBox",
+                dataField: "teacher"
+            },
+            {
+                label: {
+                    text: "Uid"
+                },
+                editorType: "dxTextBox",
+                dataField: "uid"
+            },
+            {
+                label: {
+                    text: "Class changed?"
+                },
+                editorType: "dxSelectBox",
+                editorOptions: {
+                    items: colours,
+                    displayExpr: "text",
+                    valueExpr: "id",
+                },
+                dataField: "classChanged"
+            },
+            {
+                colSpan: 2,
+                itemType: "empty"
+            },
+            items[0].items[1], items[0].items[2]
+            ],
+            name: "mainGroup"
+        }
+        if (items[0].items.length < 8 ) {
+            form.option("items", [
+                mainGroup, items[1]
+            ])
+        }
+        console.log(form.option("items"))
     }
     handleAdd = (e) => {
         let data = e.appointmentData
@@ -198,7 +204,7 @@ export default class Schedule extends React.Component {
                     : null
                 }
                 
-                <Scheduler 
+                <Scheduler
                     dataSource={this.state.data}
                     appointmentRender={RenderAppointment}
                     timeZone={"Australia/Melbourne"}
@@ -214,6 +220,7 @@ export default class Schedule extends React.Component {
                     onAppointmentAdded={this.handleAdd}
                     onAppointmentDeleted={this.handleDelete}
                     onAppointmentUpdated={this.handleUpdate}
+                    onAppointmentClick={this.onAppointmentClick}
                     //adaptivityEnabled={true}
                     defaultCurrentView={this.props.onlyDayView === "true" ? "day" : "week"}
                     defaultCurrentDate={new Date()}
