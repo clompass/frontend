@@ -63,7 +63,6 @@ export default class Schedule extends React.Component {
     onAppointmentFormOpening(e) {
         const { form } = e;
         let items = form.option("items")
-        console.log(items)
         let mainGroup = {
             colCountByScreen: {
                 "lg": 2,
@@ -124,7 +123,6 @@ export default class Schedule extends React.Component {
                 mainGroup, items[1]
             ])
         }
-        console.log(form.option("items"))
     }
     handleAdd = (e) => {
         let data = e.appointmentData
