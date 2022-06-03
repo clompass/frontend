@@ -60,9 +60,6 @@ export default class Schedule extends React.Component {
         }
         this.views = this.props.onlyDayView === "true" ? ["day"] : ["day", "week", "month"] 
     }
-    onAppointmentClick(e) {
-        console.log(e)
-    }
     onAppointmentFormOpening(e) {
         const { form } = e;
         let items = form.option("items")
@@ -220,7 +217,6 @@ export default class Schedule extends React.Component {
                     onAppointmentAdded={this.handleAdd}
                     onAppointmentDeleted={this.handleDelete}
                     onAppointmentUpdated={this.handleUpdate}
-                    onAppointmentClick={this.onAppointmentClick}
                     //adaptivityEnabled={true}
                     defaultCurrentView={this.props.onlyDayView === "true" ? "day" : "week"}
                     defaultCurrentDate={new Date()}
