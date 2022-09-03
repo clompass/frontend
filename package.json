@@ -13,6 +13,7 @@
     "fs": "0.0.1-security",
     "html-react-parser": "^1.4.8",
     "ical-js-parser": "^0.2.0",
+    "pusher-js": "^7.4.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^17.0.2",

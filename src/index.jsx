@@ -25,7 +25,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         validateLocalStorageData()
-        this.ws = io("https://api.clompass.com/get", {transports: ["websocket"]})
+        this.ws = io("https://clompass-backend-improved-production.up.railway.app/get", {transports: ["websocket"]})
         //this.ws = io("http://localhost:3001/get", {transports: ["websocket"]}) // connect to development server 
         
     }
