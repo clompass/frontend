@@ -324,7 +324,7 @@ export default class LearningTasks extends React.Component {
             <React.Fragment>
                 {this.props.renderType !== "overdue"
                     ?   <React.Fragment>
-                            <UpdateDataPage ws={this.ws} setDataPage={this.handleDataPage} setLearningTasks={this.handleLearningTasks} state={this.state.update_data_page} type="learning_tasks" />
+                            <UpdateDataPage ws={this.ws} setDataPage={this.handleDataPage} setLearningTasks={this.handleLearningTasks} state={this.state.update_data_page} type="learningtasks" />
                             <br/>   
                             <Button type="button" onClick={() => this.setState({update_data_page: true})}>Update Data</Button>
                         </React.Fragment>
