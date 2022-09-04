@@ -90,7 +90,7 @@ export class UpdateDataPage extends React.Component {
                                         </React.Fragment>
                                     )
                             }
-                            {this.type !== "learning_tasks" 
+                            {this.type !== "learningtasks" 
                                 ?   null
                                 :   (
                                         <React.Fragment>
